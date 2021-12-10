@@ -11,7 +11,7 @@ import Smurf from './Smurf';
         nickname: 'Pops',
         description: 'Papa is the practical village leader and the father figure of 100 or so young Smurfs. He is easily identified by his red Smurf hat, pants, and a shortly-trimmed white beard and moustache.'
     }
-    
+
     const { smurfs, isLoading } = state
 
     if (isLoading) {
@@ -31,7 +31,8 @@ import Smurf from './Smurf';
 const mapState = (state) => {
     return ({
         smurfs: state.smurfs,
-        isLoading: state.isLoading
+        isLoading: state.isLoading,
+        error: state.error
     })
 }
 

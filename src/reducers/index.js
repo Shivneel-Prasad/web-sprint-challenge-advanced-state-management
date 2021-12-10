@@ -36,7 +36,7 @@ const reducer = (state = initialState, action) => {
             return ({
                 ...state,
                 isLoading: true,
-                error: "Name, position and nickname fields are required."
+                error: action.payload
             })
         default:
             return state;
