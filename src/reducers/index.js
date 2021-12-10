@@ -1,46 +1,43 @@
 import { FETCH_SMURF_START, FETCH_SMURF_SUCCESS,
-    FETCH_SMURF_ERROR, FETCH_ADD_NEW_SMURF, FETCH_ERROR_MESSAGE } from './../actions'
+    FETCH_SMURF_FAILED, FETCH_ADD_NEW_SMURF, FETCH_ERROR_MESSAGE } from './../actions'
 
 export const initialState = {
     smurfsArray: [],
     isLoading: false,
-    error: "ERROR ALERT!!"
+    error: ""
 }
 
 const reducer = (state = initialState, action) => {
     switch(action.type) {
-        case FETCH_SMURF_START:
-            return {
+        case (FETCH_SMURF_START):
+            return ({
                 ...state, 
                 isLoading: true
-            }
-        case FETCH_SMURF_SUCCESS:
-            return {
-                ...state, 
-                isLoading: false, 
-                error: action.payload
-            }
-        case FETCH_SMURF_ERROR:
-            return {
+            })
+        case (FETCH_SMURF_SUCCESS):
+            return ({
                 ...state,
-                isLoading: false,
-                error: 'Something went wrong!' + action.payload
-            }
-        case FETCH_ADD_NEW_SMURF:
-            return {
-                ...state,
-                smurfsArray: [
-                    ...state.smurfsArray, 
-                    action.payload
-                ],
+                smurfsArray: action.payload,
                 isLoading: false
-            }
-        case FETCH_ERROR_MESSAGE:
-            return {
+            })
+        case (FETCH_SMURF_FAILED):
+            return ({
                 ...state,
                 isLoading: false,
-                error: 'Unable to find it. please try again'
-            }
+                error: action.payload
+            })
+        case (FETCH_ADD_NEW_SMURF):
+            return ({
+                ...state,
+                smurfsArray: [...state.smurfsArray, action.payload],
+                isLoading: false
+            })
+        case (FETCH_ERROR_MESSAGE):
+            return ({
+                ...state,
+                isLoading: true,
+                error: "Name, position and nickname fields are required."
+            })
         default:
             return state;
     }
