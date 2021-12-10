@@ -1,17 +1,10 @@
 import { FETCH_SMURF_START, FETCH_SMURF_SUCCESS,
-    FETCH_SMURF_ERROR, FETCH_ADD_SMURF, FETCH_FAILED } from './../actions'
+    FETCH_SMURF_ERROR, FETCH_ADD_NEW_SMURF, FETCH_ERROR_MESSAGE } from './../actions'
 
 export const initialState = {
-    smurfsArray: [
-        {
-            name: '',
-            nickname: '',
-            position: '',
-            description: ''
-        }
-    ],
+    smurfsArray: [],
     isLoading: false,
-    error: "Please Try Again"
+    error: "ERROR ALERT!!"
 }
 
 const reducer = (state = initialState, action) => {
@@ -31,21 +24,22 @@ const reducer = (state = initialState, action) => {
             return {
                 ...state,
                 isLoading: false,
-                error: action.payload
+                error: 'Something went wrong!' + action.payload
             }
-        case FETCH_ADD_SMURF:
+        case FETCH_ADD_NEW_SMURF:
             return {
                 ...state,
-                name: action.payload,
-                nickname: action.payload,
-                position: action.payload,
-                summary: action.payload
+                smurfsArray: [
+                    ...state.smurfsArray, 
+                    action.payload
+                ],
+                isLoading: false
             }
-        case FETCH_FAILED:
+        case FETCH_ERROR_MESSAGE:
             return {
                 ...state,
                 isLoading: false,
-                error: action.payload
+                error: 'Unable to find it. please try again'
             }
         default:
             return state;
