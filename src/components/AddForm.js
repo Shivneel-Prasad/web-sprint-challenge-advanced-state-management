@@ -25,10 +25,11 @@ const AddForm = (props) => {
         e.preventDefault();
         if (state.name === "" || state.position === "" || state.nickname === "") {
             //dispatch a custom error action
-            props.errorUpdate()
+            return props.errorUpdate('Name, position and nickname fields are required.')
         } else {
             //dispatch an addSmurf action
             props.addNewSmurf({
+                ...state,
                 name: state.name,
                 position: state.position,
                 nickname: state.nickname,
@@ -73,7 +74,9 @@ const mapState = (state) => {
     })
 }
 
-export default connect(mapState, { errorUpdate, addNewSmurf })(AddForm);
+const mapAction = { errorUpdate, addNewSmurf}
+
+export default connect(mapState, mapAction)(AddForm);
 
 //Task List:
 //1. Connect the errorMessage, setError and addSmurf actions to the AddForm component.
