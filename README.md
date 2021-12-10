@@ -112,9 +112,16 @@ In this project, you will build the reducer, actions and basic redux connects to
 Be prepared to demonstrate your understanding of this week's concepts by answering questions on the following topics. Add your answers below.
 
 1. What problem does the context API help solve?
+    A. It is a react structure that enables you to exchange unique details and assists in solving prop-drilling from all levels of the application basically its useful for sharing state between components that cannot be easily shared with props.
 
 2. In your own words, describe `actions`, `reducers` and the `store` and their role in Redux. What does each piece do? Why is the store known as a 'single source of truth' in a redux application?
+    A. Actions in Redux are the only source of information for the store as it carries a payload of information from you application to your store. It separately declares an action type constant and an action creator function for constructing action of that type basically combines two declarations into one, it takes an action type and returns an action creator for that type. 
+    B. A Reducer is a pure function that takes the state of an application and action as arguments and returns a new state. 
+    C. The store holds the application state. It is highly recommended to keep only one store in any Redux application. This eliminates the need to continuously pass state from one component to another. 
+    D. The single source of truth means that the only way to change the data in User Interface is to dispatch redux action which will change the state within redux reducer.
 
 3. What does `redux-thunk` allow us to do? How does it change our `action-creators`?
+    A. It is a middleware that allows you to return functions, rather than just actions, within Redux. This allows for delayed actions, including working with promises. One of the main use cases for this middleware is for handling actions that might not be synchronous
 
 4. What is your favorite state management system you've learned and this sprint? Please explain why!
+    I would honestly say it will be redux as it is very hard to understand and difficult to fully understand its function but it is not impossible to learn and understand.
