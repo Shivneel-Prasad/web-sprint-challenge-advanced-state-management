@@ -11,6 +11,7 @@ import { connect } from "react-redux";
 
 class App extends Component {
   componentDidMount(){
+    console.log('Mount SuccessFul');
     fetchSmurfs()
   }
   render() {

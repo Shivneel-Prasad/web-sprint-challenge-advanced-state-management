@@ -10,13 +10,14 @@ const AddForm = (props) => {
         description:""
     });
 
-    // //remove when error state is added
-    // const errorMessage = "";
-
     const handleChange = e => {
+        const value = e.target.value
         setState({
             ...state,
-            [e.target.name]:e.target.value
+            [e.target.name]:value,
+            [e.target.position]:value,
+            [e.target.nickname]:value,
+            [e.target.description]:value
         });
     }
 
@@ -27,7 +28,12 @@ const AddForm = (props) => {
             props.errorUpdate()
         } else {
             //dispatch an addSmurf action
-            props.addNewSmurf(state)
+            props.addNewSmurf({
+                name: state.name,
+                position: state.position,
+                nickname: state.nickname,
+                description: state.description
+            })
         }
     }
 
@@ -52,7 +58,9 @@ const AddForm = (props) => {
                 <textarea onChange={handleChange} value={description} name="description" id="description" />
             </div>
             {
-                props.errorMessage && <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {props.errorMessage}</div>
+                props.error && 
+                    <div data-testid="errorAlert" className="alert alert-danger" role="alert">Error: {props.error}
+                    </div>
             }
             <button>Submit Smurf</button>
         </form>
@@ -61,11 +69,11 @@ const AddForm = (props) => {
 
 const mapState = (state) => {
     return ({
-        errorMessage: state.error
+        error: state.error,
     })
 }
 
-export default connect(mapState, {errorUpdate, addNewSmurf})(AddForm);
+export default connect(mapState, { errorUpdate, addNewSmurf })(AddForm);
 
 //Task List:
 //1. Connect the errorMessage, setError and addSmurf actions to the AddForm component.
